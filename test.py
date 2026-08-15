@@ -1,5 +1,8 @@
 import pandas as pd
 import random
+import requests
+
+url = "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv"
 
 random.seed(42)
 
