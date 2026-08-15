@@ -1,24 +1,22 @@
+from io import StringIO
 import pandas as pd
-import random
 import requests
 
+# 
 url = "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv"
 
-random.seed(42)
+response = requests.get(url)
+print(response.status_code)
+print(response.text[:500])
 
-data = {
-    "year": [y for y in [2020, 2021, 2022] for _ in range(4)],
-    "quarter": [1, 2, 3, 4] * 3,
-    "sales": [random.randint(100, 500) for _ in range(12)],
-    "returns": [random.randint(10, 80) for _ in range(12)]
-}
 
-frame = pd.DataFrame(data)
-# frame["difference"] = frame["y"] - frame["x"]
+frame = pd.read_csv(StringIO(response.text), comment="#")
+print(frame.head())
+
 
 # print(frame.sort_values("y", ascending=True))
-# print(frame.describe())
+print(frame.describe())
 # print(frame)
 # print(frame.groupby("year")["sales"].mean())
 
-print(frame.groupby("year")[["sales", "returns"]].mean())
+# print(frame.groupby("year")[["sales", "returns"]].mean())
