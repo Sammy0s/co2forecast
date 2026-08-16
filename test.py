@@ -33,6 +33,8 @@ print(f"Yearly difference:\n{myLifetimeyoy.diff()}")
 
 fig, ax1 = plt.subplots()
 
+ax1.set_xticks(myLifetimeyoy.index[::2])
+
 ax2 = ax1.twinx()
 
 myLifetimeyoy.plot(ax=ax1, color='blue')
