@@ -1,6 +1,7 @@
 from io import StringIO
 import pandas as pd
 import requests
+import matplotlib.pyplot as plt
 
 # Importing data for El Nino 
 noaa_el_nino_url = "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
@@ -17,4 +18,13 @@ oni = pd.read_csv(StringIO(nino_res.text), sep='\s+')
 # print(oni.describe())
 oniMyLifetime = oni[oni['YR'].astype(int) >= 2007]
 
-print(f"{oniMyLifetime.groupby('YR')['ANOM'].mean()}")
+oniMyLifetimeyoy = oniMyLifetime.groupby('YR')[['ANOM', 'TOTAL']].mean()
+print(f"{oniMyLifetimeyoy}")
+
+fig, ax1 = plt.subplots()
+
+ax2 = ax1.twinx()
+
+oniMyLifetimeyoy['TOTAL'].plot(ax=ax1, color='orange')
+oniMyLifetimeyoy['ANOM'].plot(ax=ax2, color='green')
+plt.show()
