@@ -27,10 +27,12 @@ co2 = pd.read_csv(StringIO(co2_res.text), comment="#")
 
 oni = pd.read_csv(StringIO(nino_res.text), sep='\s+')
 
-# Getting only data from 2007 + 
-co2_myLifetime = co2[co2['year'].astype(int) >= 2007]
+# Getting only data from Specific Years
+start_year = 1959
 
-oni_MyLifetime = oni[oni['YR'].astype(int) >= 2007]
+co2_myLifetime = co2[co2['year'].astype(int) >= start_year]
+
+oni_MyLifetime = oni[oni['YR'].astype(int) >= start_year]
 
 # Average Co2 level every year of my lifetime
 co2_mylifeyoy = co2_myLifetime.groupby('year')['average'].mean()
@@ -46,7 +48,7 @@ print(f"Yearly difference:\n{co2_mylifeyoy.diff()}")
 fig, ax1 = plt.subplots()
 
 # Yearly every other year
-ax1.set_xticks(co2_mylifeyoy.index[::2])
+ax1.set_xticks(co2_mylifeyoy.index[::5])
 
 ax2 = ax1.twinx()
 ax3 = ax1.twinx()
@@ -60,6 +62,8 @@ oni_mylifeyoy['ANOM'].plot(ax=ax3, color='green')
 ax1.set_ylabel('CO2 (ppm)', color='blue')
 ax2.set_ylabel('YoY Change', color='red')
 ax3.set_ylabel('El Niño ANOM', color='green')
+
+ax3.axhline(y=0, color='green', linestyle='--', alpha=0.3)
 
 plt.tight_layout()
 plt.show()
