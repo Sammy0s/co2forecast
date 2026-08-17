@@ -28,7 +28,7 @@ co2 = pd.read_csv(StringIO(co2_res.text), comment="#")
 oni = pd.read_csv(StringIO(nino_res.text), sep='\s+')
 
 # Getting only data from Specific Years
-start_year = 1959
+start_year = 2007 #1959
 
 co2_myLifetime = co2[co2['year'].astype(int) >= start_year]
 
