@@ -31,6 +31,9 @@ ax1.set_xticks(myLifetimeyoy.index[::2])
 
 ax2 = ax1.twinx()
 
+ax1.set_ylabel('Average CO2 (ppm)', color='blue')
+ax2.set_ylabel('Yearly Difference (ppm)', color='red')
+
 myLifetimeyoy.plot(ax=ax1, color='blue')
 myLifetimeyoy.diff().plot(ax=ax2, color='red')
 
