@@ -44,7 +44,11 @@ pip install pandas matplotlib requests scipy
 Then run any script:
 
 ```bash
-python3 co2Data.py
+python3 Co2Data/co2Data.py
+```
+
+```bash
+python3 El_Nino/elNinoData.py
 ```
 
 ## Key Findings So Far
